@@ -50,6 +50,7 @@ clearBufferLoop:
   inc  hl
   ld   e, [hl]
 
+  ; Check the vram to see the values written to memory
 haltLoop:
   halt
   jr haltLoop
