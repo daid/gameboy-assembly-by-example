@@ -51,6 +51,8 @@ clearBufferLoop:
   ld   e, [hl]
 
   ; Check the vram to see the values written to memory
+  ; See a = $64, which is 100 in hex
+  ; See de = $03e8, which is 1000 in hex
 haltLoop:
   halt
   jr haltLoop
