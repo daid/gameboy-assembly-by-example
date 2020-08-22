@@ -52,6 +52,7 @@ updateJoypadState:
   ld   a, [hl]
   dec  b
   jr   nz, .dpadDebounceLoop
+  ld   [hl], P1F_GET_NONE ; Disable the joypad inputs again, saves a tiny bit of power and allows the lines to settle before the next read
 
   swap a ; We want the directional keys as upper 4 bits, so swap the nibbles.
   cpl  ; Inputs are active low, so a bit being 0 is a button pressed. So we invert this.
