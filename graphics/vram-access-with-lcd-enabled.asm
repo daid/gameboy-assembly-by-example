@@ -30,6 +30,7 @@ ENDC
   call loadPalette
   call enableLCD
 
+  ; Write 0-255 to both tilemaps. Do this correctly, or incorrectly depending on the settings at the top.
   xor  a
   ld   hl, _SCRN0
 writeBackgroundTilemapLoop:
@@ -39,11 +40,12 @@ IF ENABLE_STAT_CHECK
   ld   a, [rSTAT]
   and  STATF_BUSY
   jr   nz, .loop
-  ld   a, b
+  ; After this check you have 16 guaranteed machine cycles to access VRAM
+  ld   a, b      ; 1 machine cycle
 ENDC
 REPT WRITE_BURST_SIZE
-  ld   [hl+], a
-  inc  a
+  ld   [hl+], a  ; 2 machine cycles
+  inc  a         ; 1 machine cycle
 ENDR
   bit  3, h
   jp   nz, writeBackgroundTilemapLoop
