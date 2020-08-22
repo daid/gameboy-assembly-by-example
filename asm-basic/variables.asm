@@ -7,7 +7,7 @@ wByteVariable:
   ds 1
 ; Create a 2 byte variable
 wWordVariable:
-  ds 1
+  ds 2
 
 ; Create a 16 byte buffer
 wBuffer:
