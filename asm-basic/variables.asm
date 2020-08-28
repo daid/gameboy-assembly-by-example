@@ -1,18 +1,17 @@
-
 INCLUDE "hardware.inc"
 
 SECTION "workram", WRAM0
 ; Create a 1 byte variable
-wByteVariable:
+wByteVariable::
   ds 1
 ; Create a 2 byte variable
-wWordVariable:
+wWordVariable::
   ds 2
 
 ; Create a 16 byte buffer
-wBuffer:
+wBuffer::
   ds 16
-wBufferEnd:
+.end::
 
 
 SECTION "entry", ROM0[$100]
@@ -33,7 +32,7 @@ start:
   ; Clear wBuffer
   ld   hl, wBuffer
   xor  a
-  ld   c, wBufferEnd - wBuffer
+  ld   c, wBuffer.end - wBuffer
 clearBufferLoop:
   ld   [hl+], a
   dec  c
