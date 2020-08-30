@@ -1,0 +1,29 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/3.0.1/mini-default.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<h1>Gameboy Assembly by Example</h1>
+<p>Small functional examples of gameboy assembly programming.</p>
+<p>All examples here are minimal in nature, and can directly run and inspected by rgbds-live, a gameboy development environment in your webbrowser.</p>
+<p>These examples are not intended as a tutorial, but as a reference on how to do certain things in gameboy assembly.</p>
+<p>All code can be used freely in any way you see fit. No attribution or open source restrictions apply.</p>
+<h2>Tools&References</h2>
+<p>Must goto resource is the <a href="https://gbdev.io/pandocs/">Pan Docs</a>. This contains a lot of information about the gameboy hardware and should be your reference.</p>
+<p>rgbds: <a href="https://rednex.github.io/rgbds/">manual</a>, <a href="https://github.com/rednex/rgbds/releases">releases</a>, assembler for gameboy. And the tool behind rgbds-live.</p>
+<p><a href="https://bgb.bircd.org/">bgb</a>, best and very accurate gameboy emulator. Also contains awesome debugging features.</p>
+
+<h1>Examples: basic assembly</h1>
+<p>The following examples explain basic assembly topics. They are generally must have knowledge for anyone that wants to do something with gameboy assembly programming.</p>
+<p><a href="https://daid.github.io/rgbds-live/#https://raw.githubusercontent.com/daid/gameboy-assembly-by-example/master/asm-basic/variables.asm">Variables</a>: How to define and use variables.</p>
+
+<h1>Examples: graphics</h1>
+<p>Examples on how to interact with the graphics hardware.</p>
+<p><a href="https://daid.github.io/rgbds-live/#https://raw.githubusercontent.com/daid/gameboy-assembly-by-example/master/graphics/initial-vram-graphics.asm">Initial VRAM Graphics</a>: How to load graphics into VRAM at boot of your rom.</p>
+<p><a href="https://daid.github.io/rgbds-live/#https://raw.githubusercontent.com/daid/gameboy-assembly-by-example/master/graphics/sprites.asm">Sprites</a>: How to display sprites on the screen.</p>
+<p><a href="https://daid.github.io/rgbds-live/#https://raw.githubusercontent.com/daid/gameboy-assembly-by-example/master/graphics/vram-access-with-lcd-enabled.asm">VRAM access with LCD on</a>: Shows what happens if you try to write to VRAM while the LCD is on. And how to work around this for small VRAM updates.</p>
+
+</body>
+</html>
