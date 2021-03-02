@@ -12,12 +12,14 @@ wOAMBuffer: ; OAM Memory is for 40 sprites with 4 bytes per sprite
   ds 40 * 4
 .end:
 
-SECTION "hram", HRAM
-hOAMCopyRoutine:
-  ds 10
-.end:
+SECTION "vblankInterrupt", ROM0[$040]
+  jp vblankHandler
 
-SECTION "vblank", ROM0[$040]
+SECTION "entry", ROM0[$100]
+  jp start
+  ds $150-@, 0 ; Space for the header
+
+SECTION "vblankHandler", ROM0
 vblankHandler:
   ; VBlank interrupt. We only call the OAM DMA routine here.
   ; We need to be careful to preserve the registers that we use, see interrupt example.
@@ -26,13 +28,7 @@ vblankHandler:
   pop  af
   reti
 
-
-SECTION "entry", ROM0[$100]
-  jp start
-
-; TODO Proper GB Header
-
-SECTION "main", ROM0[$150]
+SECTION "main", ROM0
 start:
   call disableLCD
   call initOAM
@@ -80,10 +76,9 @@ initOAM:
   dec  c
   jr   nz, .clearOAMLoop
 
-  assert (hOAMCopyRoutine.end - hOAMCopyRoutine) == (oamCopyRoutine.end - oamCopyRoutine)
   ld   hl, hOAMCopyRoutine
   ld   de, oamCopyRoutine
-  ld   c, oamCopyRoutine.end - oamCopyRoutine
+  ld   c, hOAMCopyRoutine.end - hOAMCopyRoutine
 .copyOAMRoutineLoop:
   ld   a, [de]
   inc  de
@@ -95,6 +90,8 @@ initOAM:
   ret
 
 oamCopyRoutine:
+LOAD "hram", HRAM
+hOAMCopyRoutine:
   ld   a, HIGH(wOAMBuffer)
   ldh  [rDMA], a
   ld   a, $28
@@ -103,6 +100,7 @@ oamCopyRoutine:
   jr   nz, .wait
   ret
 .end:
+ENDL
 
 disableLCD:
   ; Disable the LCD, needs to happen during VBlank, or else we damage hardware
